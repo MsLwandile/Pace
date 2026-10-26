@@ -1782,6 +1782,10 @@ body,
   min-height: 1.5em;
   margin: 10px 0;
 }
+.questionnaire-match-status--no-qualifications {
+  color: #B42318 !important;
+  font-weight: 700;
+}
 .questionnaire-match-loading[hidden] {
   display: none;
 }

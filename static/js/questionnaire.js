@@ -176,7 +176,13 @@
     matchesContainer.replaceChildren();
     matchGenerate.hidden = false;
     matchRetry.hidden = true;
+    matchStatus.classList.remove("questionnaire-match-status--no-qualifications");
     matchStatus.textContent = "Choose Generate my matches to see your options.";
+  }
+
+  function showNoMatches(message) {
+    matchStatus.classList.add("questionnaire-match-status--no-qualifications");
+    matchStatus.textContent = message;
   }
 
   async function loadMatches() {
@@ -188,6 +194,7 @@
     matchRetry.disabled = true;
     matchLoading.hidden = false;
     matchesContainer.replaceChildren();
+    matchStatus.classList.remove("questionnaire-match-status--no-qualifications");
     matchStatus.textContent = "Finding options that fit your answers…";
     try {
       const response = await window.Pace.apiFetch(
@@ -201,7 +208,7 @@
       }
 
       if (!Array.isArray(response.data.matches) || response.data.matches.length === 0) {
-        matchStatus.textContent = response.data.message || "No matching credit options are available right now.";
+        showNoMatches(response.data.message || "No matching credit options are available right now.");
         return;
       }
 
@@ -214,7 +221,7 @@
         uniqueMatches.push(match);
       });
       if (uniqueMatches.length === 0) {
-        matchStatus.textContent = response.data.message || "No matching credit options are available right now.";
+        showNoMatches(response.data.message || "No matching credit options are available right now.");
         return;
       }
 
