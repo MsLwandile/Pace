@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Pace — What affects your credit?{% endblock %}
+{% block body_class %}page-credit-guide page-credit-factors{% endblock %}
+
+{% block body %}
+<header class="learning-topbar">
+  <div class="learning-brand">
+    <a href="{{ url_for('dashboard_page') }}" class="learning-home-link">
+      <img src="{{ url_for('static', filename='images/pace-logo-placeholder.svg') }}" alt="" class="pace-logo-placeholder">
+      <span class="hero-brand-p">Pace</span>
+    </a>
+    <a class="learning-back" href="{{ url_for('learning_hub_page') }}" aria-label="Back to learning tools"><span aria-hidden="true">←</span> Back</a>
+  </div>
+  <span class="learning-account">{{ session.get('user_name', 'Pace user') }}</span>
+</header>
+
+<main class="learning-main learning-page-main">
+  <section
+    class="dashboard-hero learning-page-hero"
+    style="--hero-image: url('{{ url_for('static', filename='images/banner.jpeg') }}')"
+    aria-labelledby="factor-page-title"
+  >
+    <div class="dashboard-hero-content">
+      <p class="dashboard-eyebrow">Quick activity</p>
+      <h1 class="dashboard-greeting" id="factor-page-title">Credit factor challenge</h1>
+      <p>Tap the items that can affect a credit profile. The distraction bubbles will jump around when you try to select them!</p>
+    </div>
+  </section>
+
+  <section class="factor-game card" aria-labelledby="factor-game-title">
+    <h2 id="factor-game-title">Choose All that affect your credit</h2>
+    <p class="factor-game-score" id="factor-game-score" aria-live="polite">Choose all the correct bubbles.</p>
+    <div class="factor-bubbles" id="factor-bubbles"></div>
+    <div class="factor-game-result" id="factor-game-result" aria-live="polite"></div>
+    <button class="btn btn-secondary factor-game-reset" id="factor-game-reset" type="button" hidden>Play again</button>
+  </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/credit-factors.js') }}"></script>
+{% endblock %}

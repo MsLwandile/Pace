@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Pace — Credit impact simulator{% endblock %}
+{% block body_class %}page-credit-guide page-credit-impact{% endblock %}
+
+{% block body %}
+<header class="learning-topbar">
+  <div class="learning-brand">
+    <a href="{{ url_for('dashboard_page') }}" class="learning-home-link">
+      <img src="{{ url_for('static', filename='images/pace-logo-placeholder.svg') }}" alt="" class="pace-logo-placeholder">
+      <span class="hero-brand-p">Pace</span>
+    </a>
+    <a class="learning-back" href="{{ url_for('learning_hub_page') }}" aria-label="Back to learning tools"><span aria-hidden="true">←</span> Back</a>
+  </div>
+  <span class="learning-account">{{ session.get('user_name', 'Pace user') }}</span>
+</header>
+
+<main class="learning-main learning-page-main">
+  <section
+    class="dashboard-hero learning-page-hero"
+    style="--hero-image: url('{{ url_for('static', filename='images/banner.jpeg') }}')"
+    aria-labelledby="simulator-page-title"
+  >
+    <div class="dashboard-hero-content">
+      <p class="dashboard-eyebrow">A learning tool, not a credit score</p>
+      <h1 class="dashboard-greeting" id="simulator-page-title">Credit impact simulator</h1>
+      <p>Move each slider to explore how these habits may influence credit health. This illustration is educational and does not calculate a real score.</p>
+    </div>
+  </section>
+
+  <section class="credit-simulator card" aria-labelledby="simulator-title">
+    <h2 id="simulator-title">Your simulated credit impact</h2>
+    <div class="impact-meter" role="img" aria-label="Simulated impact meter">
+      <div class="impact-meter-arc"></div>
+      <div class="impact-meter-needle" id="impact-meter-needle"></div>
+      <div class="impact-meter-center"></div>
+      <span class="impact-meter-label impact-meter-negative">Negative Impact</span>
+      <span class="impact-meter-label impact-meter-positive">Positive Impact</span>
+    </div>
+    <p class="impact-meter-result" id="impact-meter-result" aria-live="polite">Balanced impact</p>
+
+    <div class="simulator-controls">
+      <label class="simulator-control" for="timeous-payments">
+        <span><strong>Timeous Payments</strong><span>Paying on time can help build a positive history.</span></span>
+        <input id="timeous-payments" type="range" min="0" max="100" value="50" data-impact="positive" aria-label="Timeous Payments">
+        <span class="simulator-range-labels"><span>Rarely</span><span>Consistently</span></span>
+      </label>
+      <label class="simulator-control" for="credit-applications">
+        <span><strong>Applying everywhere for credit</strong><span>Many applications in a short time may be a warning sign.</span></span>
+        <input id="credit-applications" type="range" min="0" max="100" value="0" data-impact="negative" aria-label="Applying everywhere for credit">
+        <span class="simulator-range-labels"><span>Few applications</span><span>Many applications</span></span>
+      </label>
+      <label class="simulator-control" for="missed-payments">
+        <span><strong>Missed payments</strong><span>Missed or late payments can harm a credit profile.</span></span>
+        <input id="missed-payments" type="range" min="0" max="100" value="0" data-impact="negative" aria-label="Missed payments">
+        <span class="simulator-range-labels"><span>None</span><span>Often</span></span>
+      </label>
+      <label class="simulator-control" for="maxed-limit">
+        <span><strong>Maxing out credit limit</strong><span>Using most of your available credit can increase risk.</span></span>
+        <input id="maxed-limit" type="range" min="0" max="100" value="0" data-impact="negative" aria-label="Maxing out credit limit">
+        <span class="simulator-range-labels"><span>Low use</span><span>Maxed out</span></span>
+      </label>
+      <label class="simulator-control" for="unpaid-debt">
+        <span><strong>Previous unpaid debt</strong><span>Unpaid accounts may negatively affect your credit history.</span></span>
+        <input id="unpaid-debt" type="range" min="0" max="100" value="0" data-impact="negative" aria-label="Previous unpaid debt">
+        <span class="simulator-range-labels"><span>None</span><span>More unpaid debt</span></span>
+      </label>
+    </div>
+  </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/credit-simulator.js') }}"></script>
+{% endblock %}

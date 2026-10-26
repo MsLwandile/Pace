@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}Pace — Explore credit options{% endblock %}
+{% block body_class %}page-credit-guide page-credit-options{% endblock %}
+
+{% block body %}
+<header class="learning-topbar">
+  <div class="learning-brand">
+    <a href="{{ url_for('dashboard_page') }}" class="learning-home-link">
+      <img src="{{ url_for('static', filename='images/pace-logo-placeholder.svg') }}" alt="" class="pace-logo-placeholder">
+      <span class="hero-brand-p">Pace</span>
+    </a>
+    <a class="learning-back" href="{{ url_for('dashboard_page') }}" aria-label="Back to dashboard"><span aria-hidden="true">←</span> Back</a>
+  </div>
+  <span class="learning-account">{{ session.get('user_name', 'Pace user') }}</span>
+</header>
+
+<main class="learning-main learning-page-main">
+  <section
+    class="dashboard-hero learning-page-hero"
+    style="--hero-image: url('{{ url_for('static', filename='images/banner.jpeg') }}')"
+    aria-labelledby="credit-options-title"
+  >
+    <div class="dashboard-hero-content">
+      <p class="dashboard-eyebrow">Explore your options</p>
+      <h1 class="dashboard-greeting" id="credit-options-title">Your Credit, Your Choice</h1>
+      <p>Compare eligibility details and required documents for different credit options.</p>
+    </div>
+  </section>
+
+  {% if load_error %}
+    <p class="credit-options-message credit-options-error" role="alert">{{ load_error }}</p>
+  {% else %}
+    {% set has_options = option_groups | selectattr('options') | list | length > 0 %}
+    {% if has_options %}
+      {% for group in option_groups %}
+        {% if group.options %}
+          <section class="credit-option-group" aria-labelledby="credit-option-group-{{ loop.index }}">
+            <h2 id="credit-option-group-{{ loop.index }}">{{ group.title }}</h2>
+            <div class="credit-option-list">
+              {% for option in group.options %}
+                <article class="credit-option-card">
+                  <div class="credit-option-icon" aria-hidden="true">
+                    <svg viewBox="0 0 32 32" focusable="false">
+                      <path d="M4 12h24L16 5 4 12Zm3 3v9m6-9v9m6-9v9m6-9v9M4 27h24M2 12h28" />
+                    </svg>
+                  </div>
+                  <div class="credit-option-details">
+                    <h3><a href="{{ option.lender_url }}" target="_blank" rel="noopener noreferrer">{{ option.account_name }}</a></h3>
+                    <p>Age: {{ option.min_age if option.min_age is not none else "Not specified" }}-{{ option.max_age if option.max_age is not none else "Not specified" }}</p>
+                    <p>Minimum income: {{ option.min_income }}</p>
+                  </div>
+                </article>
+              {% endfor %}
+            </div>
+          </section>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <p class="credit-options-message">No credit options are available right now.</p>
+    {% endif %}
+  {% endif %}
+</main>
+{% endblock %}

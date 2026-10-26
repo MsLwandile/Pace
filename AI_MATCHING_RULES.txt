@@ -1,0 +1,123 @@
+AI Credit Matching Rules
+
+Hard screening rules:
+
+1. The user must be at least 18 and meet the option's listed minimum age.
+   If the option has no usable minimum-age value, use age 18 for screening and
+   tell the user to confirm the age requirement with the provider.
+2. The user must indicate that they can provide a South African ID or a valid
+   work visa/permit.
+3. A non-student must not be recommended a student-only account.
+4. Students may be recommended both student-only and non-student options.
+5. If minimum_income is less than R1499, user does not match with any options 
+automatically. Display a final message of "You do not seem to qualify for available credit opportunities."
+
+Accessible ranking rules (these are not disqualifiers):
+
+1. Maximum age is a ranking factor, not a hard cutoff. A maximum age of 80
+   means there is no maximum age. When the user's age is above another listed
+   maximum, the option can still be recommended as a potential match with a
+   reduced age-fit score and a note to confirm the requirement.
+2. Minimum income is a ranking factor. Users at or below the listed minimum
+   income can still see the option, with a lower income-fit score and a note.
+   Missing minimum-income data receives a neutral score.
+3. A known Min_Credit_Limit is the minimum monthly repayment capacity accepted
+   by the lender. The user's capacity meets this preference only when it is
+   strictly greater than Min_Credit_Limit. Since this is configured as a soft
+   criterion below, an option may still be recommended with a lower score and
+   a note when the user does not exceed it. A zero or missing value means the
+   amount is unknown; use repayment capacity relative to income for ranking.
+4. Required documents are a ranking factor, not a hard cutoff. Partial or no
+   listed document matches reduce the document-fit score and may add a note.
+   Missing database document details receive a neutral score and a note to
+   confirm with the provider. A matching South African ID or valid work
+   visa/permit satisfies a listed legal-identity-document requirement.
+5. Missing maximum-age data is treated as no known maximum. An invalid
+   maximum-age value is not used to reject an option.
+
+Ranking weights:
+
+- Age fit: 10%.
+- Income fit: 25%.
+- Repayment fit: 30%.
+- Required-document fit: 15%.
+- Credit-type and stated-goal fit: 20%.
+
+Recommendation behavior:
+
+- A potential match must achieve at least 55% of the total weighted score
+  (score >= 0.55 out of 1.00). Options below this threshold are not returned.
+- If no options meet the 55% threshold and hard screening rules, return no
+  matches and show the no-match message.
+- Sort potential matches by weighted score and return up to the top three.
+- If one or two options are available, return those instead of requiring
+  three.
+- If Gemini omits a shortlisted option, fill remaining slots from the
+  highest-scoring options selected by the server.
+- Show any unmet or unknown criteria as notes. Call results potential
+  matches, not confirmed eligibility or credit approval; users should verify
+  requirements with each provider.
+- When Gemini is configured and available, it may rank only the server-selected
+  candidates and provide short reasons. It cannot add options or override hard
+  screening rules.
+- Gemini is optional for serving matches. If its API key is missing or its
+  service is unavailable, return the server's weighted-score ranking with a
+  concise notice that Gemini is unavailable and the options are ranked using
+  the configured rules. Do not block matches.
+
+Runtime configuration
+---------------------
+
+The JSON block below is the authoritative runtime configuration. The
+application reads it from this file whenever it processes a match request.
+Edit the configuration values here to adjust eligibility behavior, database
+column aliases, ranking weights, minimum score, or recommendation count. Keep
+the JSON valid and keep the weights summing to 1.0. The prose above explains
+the rules; changing prose alone does not change runtime behavior.
+
+BEGIN MATCHING CONFIG
+{
+  "hard_rules": {
+    "minimum_user_age": 18,
+    "missing_minimum_age_default": 18,
+    "require_legal_identity": true,
+    "exclude_student_only_for_non_students": true
+  },
+  "database_fields": {
+    "option_id": ["id"],
+    "account_name": ["AccountName", "account_name", "account_namee", "name"],
+    "product_type": ["Type", "type", "credit_type", "option_type", "category", "product_type"],
+    "minimum_age": ["Min_Age", "minimum_age"],
+    "maximum_age": ["Max_Age", "maximum_age"],
+    "minimum_income": ["Min_Income", "minimum_income"],
+    "minimum_credit_limit": ["Min_Credit_Limit", "min_credit_limit", "minimum_credit_limit"],
+    "required_documents": ["Required_Docs", "required_docs", "documents_required", "required_documents"],
+    "student_status": ["student_status", "Student_Status"]
+  },
+  "student_only_values": [
+    "yes",
+    "true",
+    "student",
+    "student only",
+    "student account",
+    "students only",
+    "required"
+  ],
+  "max_age_no_limit_sentinel": 80,
+  "soft_criteria": [
+    "maximum_age",
+    "minimum_income",
+    "minimum_credit_limit",
+    "documents"
+  ],
+  "minimum_match_score": 0.55,
+  "max_recommendations": 3,
+  "weights": {
+    "age_fit": 0.10,
+    "income_fit": 0.25,
+    "repayment_fit": 0.30,
+    "document_fit": 0.15,
+    "type_and_goal_fit": 0.20
+  }
+}
+END MATCHING CONFIG

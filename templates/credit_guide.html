@@ -4,21 +4,27 @@
 
 {% block body %}
 <header class="learning-topbar">
-  <a href="{{ url_for('dashboard_page') }}" class="hero-brand-p">Pace</a>
-  <a href="{{ url_for('dashboard_page') }}">Back to dashboard</a>
+  <div class="learning-brand">
+    <a href="{{ url_for('dashboard_page') }}" class="learning-home-link">
+      <img src="{{ url_for('static', filename='images/pace-logo-placeholder.svg') }}" alt="" class="pace-logo-placeholder">
+      <span class="hero-brand-p">Pace</span>
+    </a>
+    <a class="learning-back" href="{{ url_for('learning_hub_page') }}" aria-label="Back to learning tools"><span aria-hidden="true">←</span> Back</a>
+  </div>
+  <span class="learning-account">{{ session.get('user_name', 'Pace user') }}</span>
 </header>
 
-<main
-  class="learning-main"
-  style="--hero-image: url('{{ url_for('static', filename='images/hero-growth.png') }}')"
->
-  <section class="learning-hero" aria-labelledby="guide-title">
-    <p class="learning-hero-kicker">The money basics</p>
-    <h1 id="guide-title">Understanding credit</h1>
-    <p>
-      Credit can help you work towards big goals, but it helps to know how it
-      works before you borrow. Let’s break it down, no stress.
-    </p>
+<main class="learning-main learning-page-main">
+  <section
+    class="dashboard-hero learning-page-hero"
+    style="--hero-image: url('{{ url_for('static', filename='images/banner.jpeg') }}')"
+    aria-labelledby="guide-title"
+  >
+    <div class="dashboard-hero-content">
+      <p class="dashboard-eyebrow">The money basics</p>
+      <h1 class="dashboard-greeting" id="guide-title">Understanding credit</h1>
+      <p>Credit can help you work towards big goals, but it helps to know how it works before you borrow. Let’s break it down, no stress.</p>
+    </div>
   </section>
 
   <article class="credit-article">
@@ -183,23 +189,6 @@
       </ul>
     </section>
 
-    <section class="credit-article-section credit-pace-section">
-      <h2>Where does Pace fit in?</h2>
-      <p>
-        Pace is here to make the basics easier to understand. You can explore
-        an indicative assessment, learn about credit, and use monthly insights
-        to reflect on money habits. The figures and examples in this demo are
-        simulated: Pace isn’t a lender or credit bureau, and its demo assessment
-        isn’t a credit decision or offer.
-      </p>
-      <p>
-        No shortcuts or magic tricks—just clear info and steady habits. Build
-        your credit story one sensible move at a time.
-      </p>
-      <a href="{{ url_for('dashboard_page') }}" class="btn btn-primary">
-        Back to your dashboard
-      </a>
-    </section>
   </article>
 </main>
 {% endblock %}

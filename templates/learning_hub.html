@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Pace — Learn about credit{% endblock %}
+{% block body_class %}page-credit-guide page-learning-hub{% endblock %}
+
+{% block body %}
+<header class="learning-topbar">
+  <div class="learning-brand">
+    <a href="{{ url_for('dashboard_page') }}" class="learning-home-link">
+      <img src="{{ url_for('static', filename='images/pace-logo-placeholder.svg') }}" alt="" class="pace-logo-placeholder">
+      <span class="hero-brand-p">Pace</span>
+    </a>
+    <a class="learning-back" href="{{ url_for('dashboard_page') }}" aria-label="Back to dashboard"><span aria-hidden="true">←</span> Back</a>
+  </div>
+  <span class="learning-account">{{ session.get('user_name', 'Pace user') }}</span>
+</header>
+
+<main class="learning-main learning-page-main">
+  <section
+    class="dashboard-hero learning-page-hero"
+    style="--hero-image: url('{{ url_for('static', filename='images/banner.jpeg') }}')"
+    aria-labelledby="learning-title"
+  >
+    <div class="dashboard-hero-content">
+      <p class="dashboard-eyebrow">Explore and learn</p>
+      <h1 class="dashboard-greeting" id="learning-title">Learn Something New Today!</h1>
+      <p>Build your credit knowledge with a guide, a simulator, and a quick interactive activity.</p>
+    </div>
+  </section>
+
+  <section class="learning-hub-grid" aria-label="Learning tools">
+    <a class="learning-hub-tile" href="{{ url_for('credit_guide_page') }}">
+      <span class="dashboard-tile-kicker">The money basics</span>
+      <h2>Understanding credit</h2>
+      <p>Learn how credit works, what a credit history means, and how to build healthy habits.</p>
+      <span class="dashboard-tile-link">Open the credit guide <span aria-hidden="true">→</span></span>
+    </a>
+
+    <a class="learning-hub-tile" href="{{ url_for('credit_impact_page') }}">
+      <span class="dashboard-tile-kicker">Try the simulator</span>
+      <h2>Credit impact simulator</h2>
+      <p>Adjust everyday credit habits and see how they can affect a simulated credit impact meter.</p>
+      <span class="dashboard-tile-link">Open the simulator <span aria-hidden="true">→</span></span>
+    </a>
+
+    <a class="learning-hub-tile" href="{{ url_for('credit_factors_page') }}">
+      <span class="dashboard-tile-kicker">Quick activity</span>
+      <h2>Choose what affects your credit</h2>
+      <p>Pick the habits and events that can affect a credit profile. Distractor bubbles will try to escape!</p>
+      <span class="dashboard-tile-link">Play the activity <span aria-hidden="true">→</span></span>
+    </a>
+  </section>
+</main>
+{% endblock %}

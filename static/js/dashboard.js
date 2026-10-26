@@ -5,7 +5,6 @@
   const { apiFetch, formatZAR, DEMO_FALLBACK, toast } = window.Pace;
 
   const state = {
-    user: null,
     data: null,
     offline: false,
   };
@@ -14,19 +13,12 @@
 
   async function init() {
     await loadData();
-    state.user = state.data?.user || {
-      name: document.getElementById("user-name").textContent.trim(),
-      initials: document.getElementById("user-initial").textContent.trim(),
-    };
     renderHeader();
     renderSummary();
   }
 
   function renderHeader() {
-    const name = state.user?.name || "Pace user";
-    const initial = (state.user?.initials || name[0] || "P").toUpperCase();
-    document.getElementById("user-name").textContent = name;
-    document.getElementById("user-initial").textContent = initial;
+    document.getElementById("user-name").textContent = "Pacey";
   }
 
   async function loadData() {

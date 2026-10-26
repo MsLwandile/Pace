@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Pace — Build financial health and savviness{% endblock %}
+{% block title %}Pace — Build your credit confidence{% endblock %}
 {% block body_class %}page-landing{% endblock %}
 
 {% block body %}
@@ -7,10 +7,11 @@
 <!-- ============================ HERO ============================ -->
 <section
   class="hero"
-  style="--hero-image: url('{{ url_for('static', filename='images/hero-growth.png') }}')"
+  style="--hero-image: url('{{ url_for('static', filename='images/banner.jpeg') }}')"
 >
   <header class="hero-topbar">
     <a href="{{ url_for('index') }}" class="hero-brand">
+      <img src="{{ url_for('static', filename='images/pace-logo-placeholder.svg') }}" alt="" class="pace-logo-placeholder">
       <span class="hero-brand-p">Pace</span>
     </a>
     <a href="{{ url_for('signin_page') }}" class="btn btn-pill btn-ghost-light">
@@ -20,13 +21,13 @@
 
   <div class="hero-content">
     <h1 class="hero-title">
-      Assisting you build financial<br>
-      health and savviness
+      Build your credit confidence,<br>
+      at your pace
     </h1>
     <p class="hero-subtitle">
-      Our mission is to help Pace deliver financial health and savviness
-      to young South Africans — with guided steps that contribute to
-      positive credit health.
+      Pace helps young South Africans understand credit, explore options
+      that fit their circumstances, and build healthier financial habits.
+      Our goal is to make every next step clearer and more confident.
     </p>
   </div>
 </section>
@@ -36,48 +37,27 @@
   <div class="tile-grid">
 
     <article class="tile" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="tile-dialog" aria-expanded="false">
-      <h2 class="tile-title">Understanding credit</h2>
+      <h2 class="tile-title">Personalised guidance</h2>
       <p class="tile-body">
-        Navigate your first credit steps, and understand what affects,
-        and contributes to a positive credit health.
+        Answer a few questions to explore potential credit options against
+        your needs, circumstances, and repayment comfort.
       </p>
-      <div class="tile-illustration" aria-hidden="true">
-        <img
-          src="{{ url_for('static', filename='images/credit-health.png') }}"
-          alt=""
-          class="tile-image"
-        >
-      </div>
     </article>
 
     <article class="tile" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="tile-dialog" aria-expanded="false">
-      <h2 class="tile-title">Your Eligibility and Assessment</h2>
+      <h2 class="tile-title">Learn about credit</h2>
       <p class="tile-body">
-        Understand how Pace calculates your credit viability, and where
-        it places you amongst South African youth.
+        Explore clear guides, interactive tools, and activities that explain
+        how credit works and how everyday choices can affect your credit health.
       </p>
-      <div class="tile-illustration" aria-hidden="true">
-        <img
-          src="{{ url_for('static', filename='images/eligibility-assessment.png') }}"
-          alt=""
-          class="tile-image"
-        >
-      </div>
     </article>
 
     <article class="tile" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="tile-dialog" aria-expanded="false">
-      <h2 class="tile-title">Your monthly insights</h2>
+      <h2 class="tile-title">Discover credit options</h2>
       <p class="tile-body">
-        Analyse and understand your habits, with guided next steps on
-        how to stay on a positive track.
+        Compare credit cards, retail accounts, and cellphone contracts.
+        Review key details and visit lenders to learn more about their products.
       </p>
-      <div class="tile-illustration" aria-hidden="true">
-        <img
-          src="{{ url_for('static', filename='images/monthly-insights.png') }}"
-          alt=""
-          class="tile-image"
-        >
-      </div>
     </article>
 
   </div>
@@ -101,7 +81,7 @@
     <a href="#">Programs</a>
     <a href="#">Contact Us</a>
   </nav>
-  <p class="footer-legal">Luwes. All Rights Reserved</p>
+  <p class="footer-legal">Luwes. All Rights Reserved.</p>
 </footer>
 
 {% endblock %}

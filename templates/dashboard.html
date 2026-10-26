@@ -6,11 +6,9 @@
 <div class="app-shell">
   <div class="app-topbar">
   <a href="{{ url_for('dashboard_page') }}" class="app-topbar-brand">
+    <img src="{{ url_for('static', filename='images/pace-logo-placeholder.svg') }}" alt="" class="pace-logo-placeholder">
     <span class="hero-brand-p">Pace</span>
   </a>
-  <nav class="app-topbar-nav">
-    <a href="{{ url_for('dashboard_page') }}"   class="{% if request.endpoint == 'dashboard_page' %}active{% endif %}">Home</a>
-  </nav>
   <form method="post" action="{{ url_for('logout') }}">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <button type="submit" class="btn-ghost-sm">Log out</button>
@@ -20,109 +18,126 @@
   <main class="app-main dashboard-main">
     <section
       class="dashboard-hero"
-      style="--hero-image: url('{{ url_for('static', filename='images/hero-growth.png') }}')"
+      style="--hero-image: url('{{ url_for('static', filename='images/banner.jpeg') }}')"
       aria-labelledby="dashboard-greeting"
     >
       <div class="dashboard-hero-content">
-        <p class="dashboard-eyebrow">Your Pace overview</p>
+        <p class="dashboard-eyebrow">Your Financial Future, At Your Pace</p>
         <h1 class="dashboard-greeting" id="dashboard-greeting">
-          Welcome, <span id="user-name">{{ session.get('user_name', 'Pace user') }}</span>
+          Welcome, <span id="user-name">Pacey</span>
         </h1>
         <p>Build your financial health, one confident step at a time.</p>
       </div>
-      <div class="avatar dashboard-avatar" id="user-initial" aria-hidden="true">{{ session.get('user_name', 'P')[:1]|upper }}</div>
     </section>
 
     <section class="dashboard-grid" aria-label="Your Pace tools">
-      <a href="{{ url_for('eligibility_page') }}" class="dashboard-tile">
-        <span class="dashboard-tile-kicker">Understand your progress</span>
-        <h2>Your assessment and eligibility</h2>
+      <a href="{{ url_for('eligibility_page') }}" class="dashboard-tile dashboard-questionnaire-trigger">
+        <span class="dashboard-tile-kicker">Find your credit Fit</span>
+        <h2>Personalised Guidance</h2>
         <p class="dashboard-tile-description">
-          See your credit tier, indicative limit, and how your profile is assessed.
+          Take our quick questionnaire TODAY to explore different credit options, that fit your budget!
         </p>
-        <div class="dashboard-tile-metrics">
-          <div>
-            <span class="card-label">Credit tier</span>
-            <strong id="tier-label">Tier 2</strong>
-          </div>
-          <div>
-            <span class="card-label">Indicative limit</span>
-            <strong id="credit-limit">R 1 700</strong>
-          </div>
-        </div>
+
         <div class="dashboard-tile-footer">
           <img
-            src="{{ url_for('static', filename='images/eligibility-assessment.png') }}"
+            src="{{ url_for('static', filename='images/PaceCoin.jpeg') }}"
             alt=""
-            class="dashboard-tile-image"
+            class="dashboard-tile-image dashboard-tile-image-guidance"
           >
-          <span class="dashboard-tile-link">View your assessment <span aria-hidden="true">→</span></span>
+          <span class="dashboard-tile-link"> Take the questionnaire <span aria-hidden="true">→</span></span>
         </div>
       </a>
 
-      <a href="{{ url_for('insights_page') }}" class="dashboard-tile">
-        <span class="dashboard-tile-kicker">Guidance for your next step</span>
-        <h2>Your Monthly Insights</h2>
+      <a href="{{ url_for('learning_hub_page') }}" class="dashboard-tile dashboard-learning-tile">
+        <span class="dashboard-tile-kicker">Check this out</span>
+        <h2>Learn Something New Today!</h2>
         <p class="dashboard-tile-description">
-          Explore your monthly report, understand your habits, and find helpful next steps.
+          Explore this month's guide to understanding credit, why it matters, and how to be financially savvy.
         </p>
         <div class="dashboard-insights-preview">
           <span class="insights-preview-dot" aria-hidden="true"></span>
-          <span>Personalised guidance for a healthier financial journey.</span>
+          <span>Explore credit guides, tools, and activities.</span>
         </div>
         <div class="dashboard-tile-footer">
           <img
-            src="{{ url_for('static', filename='images/monthly-insights.png') }}"
+            src="{{ url_for('static', filename='images/PaceLearn.jpeg') }}"
             alt=""
             class="dashboard-tile-image"
           >
-          <span class="dashboard-tile-link">Explore monthly insights <span aria-hidden="true">→</span></span>
+          <span class="dashboard-tile-link">Explore learning tools <span aria-hidden="true">→</span></span>
         </div>
       </a>
 
-      <a href="{{ url_for('credit_guide_page') }}" class="dashboard-tile">
-        <span class="dashboard-tile-kicker">Build your financial knowledge</span>
-        <h2>Understanding credit</h2>
+      <a href="{{ url_for('credit_options_page') }}" class="dashboard-tile dashboard-discover-tile">
+        <span class="dashboard-tile-kicker">Explore other credit options</span>
+        <h2>Your Credit, Your Choice</h2>
         <p class="dashboard-tile-description">
-          Learn how repayments, credit use, and consistent financial habits
-          can contribute to a healthy credit profile.
+          Compare credit cards, retail store cards, and cellphone contracts.
         </p>
         <div class="dashboard-tile-footer">
           <img
-            src="{{ url_for('static', filename='images/credit-health.png') }}"
+            src="{{ url_for('static', filename='images/PaceDiscover.jpeg') }}"
             alt=""
             class="dashboard-tile-image"
           >
-          <span class="dashboard-tile-link">Start the guide <span aria-hidden="true">→</span></span>
+          <span class="dashboard-tile-link">Explore credit options <span aria-hidden="true">→</span></span>
         </div>
       </a>
 
-      <article class="dashboard-tile">
-        <span class="dashboard-tile-kicker">Keep moving forward</span>
-        <h2>Upcoming milestones</h2>
-        <p class="dashboard-tile-description">
-          Small, consistent actions can help build a stronger financial foundation.
-        </p>
-        <ul class="dashboard-milestones">
-          <li>
-            <span class="milestone-marker" aria-hidden="true">1</span>
-            <span>Review your assessment and eligibility</span>
-          </li>
-          <li>
-            <span class="milestone-marker" aria-hidden="true">2</span>
-            <span>Explore your latest monthly insights</span>
-          </li>
-          <li>
-            <span class="milestone-marker" aria-hidden="true">3</span>
-            <span>Keep building positive financial habits</span>
-          </li>
-        </ul>
-      </article>
     </section>
   </main>
+  <footer class="site-footer dashboard-footer">
+    <p class="footer-legal">Luwes. All Rights Reserved.</p>
+  </footer>
 </div>
+
+<dialog class="questionnaire-dialog" id="questionnaire-dialog" aria-label="Personalised guidance questionnaire">
+  <section class="questionnaire-panel">
+    <header class="questionnaire-header">
+      <div class="questionnaire-header-progress">
+        <p class="dashboard-tile-kicker">Personalised guidance</p>
+        <div class="questionnaire-progress">
+          <span id="questionnaire-progress-label">Loading questionnaire…</span>
+          <progress id="questionnaire-progress" max="10" value="0"></progress>
+        </div>
+      </div>
+      <div class="questionnaire-image-placeholder" aria-hidden="true">
+        <img src="{{ url_for('static', filename='images/pace-logo-placeholder.svg') }}" alt="" class="pace-logo-placeholder">
+      </div>
+      <button class="questionnaire-close" type="button" aria-label="Close questionnaire">&times;</button>
+    </header>
+    <div class="questionnaire-content">
+      <form id="questionnaire-form" hidden>
+        <fieldset>
+          <legend id="questionnaire-question"></legend>
+          <p class="questionnaire-hint" id="questionnaire-hint"></p>
+          <div class="questionnaire-choices" id="questionnaire-choices"></div>
+        </fieldset>
+        <p class="questionnaire-error" id="questionnaire-error" role="alert" aria-live="polite"></p>
+        <button class="btn btn-primary questionnaire-next" id="questionnaire-next" type="submit">Next</button>
+      </form>
+      <div class="questionnaire-complete" id="questionnaire-complete" hidden>
+        <h3>Your potential matches</h3>
+        <p>These options are ranked using your answers. A potential match does not confirm that you meet the provider's requirements or will be approved. Review any notes and confirm details with the provider.</p>
+        <p class="questionnaire-match-status" id="questionnaire-match-status" role="status" aria-live="polite"></p>
+        <div class="questionnaire-match-loading" id="questionnaire-match-loading" role="status" aria-live="polite" hidden>
+          <div class="questionnaire-match-loading-card">
+            <span class="questionnaire-match-spinner" aria-hidden="true"></span>
+            <span>Finding your credit options…</span>
+          </div>
+        </div>
+        <div class="questionnaire-matches" id="questionnaire-matches"></div>
+        <button class="btn btn-primary questionnaire-match-generate" id="questionnaire-match-generate" type="button">Generate my matches</button>
+        <button class="btn btn-secondary questionnaire-match-retry" id="questionnaire-match-retry" type="button" hidden>Try again</button>
+        <button class="btn btn-primary questionnaire-done" type="button">Back to dashboard</button>
+      </div>
+      <p class="questionnaire-error" id="questionnaire-load-error" role="alert" aria-live="polite"></p>
+    </div>
+  </section>
+</dialog>
 {% endblock %}
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script src="{{ url_for('static', filename='js/questionnaire.js') }}"></script>
 {% endblock %}

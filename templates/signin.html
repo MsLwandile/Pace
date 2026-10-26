@@ -5,9 +5,12 @@
 {% block body %}
 <main
   class="signin-shell"
-  style="--signin-image: url('{{ url_for('static', filename='images/hero-growth.png') }}')"
+  style="--signin-image: url('{{ url_for('static', filename='images/banner.jpeg') }}')"
 >
-  <a href="{{ url_for('index') }}" class="signin-brand">Pace</a>
+  <a href="{{ url_for('index') }}" class="signin-brand">
+    <img src="{{ url_for('static', filename='images/pace-logo-placeholder.svg') }}" alt="" class="pace-logo-placeholder">
+    Pace
+  </a>
   <section class="signin-card" aria-labelledby="signin-title">
     <h1 id="signin-title">Welcome to Pace</h1>
     <p class="signin-intro">

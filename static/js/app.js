@@ -97,8 +97,8 @@ function toast(message, { type = "info", ms = 3000 } = {}) {
     (type === "error"
       ? "background:#B23A48;color:#fff;"
       : type === "success"
-      ? "background:#1FA971;color:#fff;"
-      : "background:#0F3D2E;color:#fff;");
+      ? "background:#477A58;color:#fff;"
+      : "background:#574260;color:#fff;");
   host.appendChild(t);
   setTimeout(() => t.remove(), ms);
 }

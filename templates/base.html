@@ -16,6 +16,8 @@
   data-api-eligibility="{{ url_for('api_eligibility_get') }}"
   data-api-insights="{{ url_for('api_insights') }}"
   data-api-eligibility-recompute="{{ url_for('api_eligibility_post') }}"
+  data-api-questionnaire="{{ url_for('api_questionnaire') }}"
+  data-api-questionnaire-matches="{{ url_for('api_questionnaire_matches') }}"
 >
   {% block body %}{% endblock %}
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
