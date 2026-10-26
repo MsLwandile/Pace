@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Pace — Your eligibility{% endblock %}
+{% block body_class %}page-app page-eligibility{% endblock %}
+
+{% block body %}
+<div class="app-shell">
+  {% include "sidebar.html" %}
+  <main class="app-main">
+    <header class="app-header">
+      <div>
+        <p class="dashboard-eyebrow">Your assessment</p>
+        <h1>Your eligibility</h1>
+      </div>
+    </header>
+
+    <section class="card eligibility-result" aria-labelledby="eligibility-title">
+      <h2 id="eligibility-title">Indicative assessment</h2>
+      <span class="badge-success"><span class="check" aria-hidden="true">✓</span> Eligible</span>
+      <p class="result-reason" id="eligibility-reason">{{ eligibility.reason }}</p>
+      <div class="limit-box">
+        <span class="card-label">Indicative credit limit</span>
+        <p class="card-value big" id="eligibility-limit">R {{ "{:,.0f}".format(eligibility.limit) }}</p>
+      </div>
+      <div class="tier-row">
+        <span class="tier-icon" aria-hidden="true">{{ eligibility.tier }}</span>
+        <strong id="eligibility-tier">{{ eligibility.tier_label }}</strong>
+      </div>
+      <details>
+        <summary>How this is calculated</summary>
+        <ul id="eligibility-calculation">
+          {% for item in eligibility.how_calculated %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </details>
+    </section>
+
+    <section class="card" aria-labelledby="income-title">
+      <h2 id="income-title">Explore an income estimate</h2>
+      <p>Change the monthly income amount to see an indicative estimate. This is simulated demo data, not a credit decision.</p>
+      <form id="eligibility-form">
+        <label class="field" for="monthly-income">
+          <span>Monthly income (R)</span>
+          <input id="monthly-income" name="monthly_income" type="number" min="0" step="0.01" value="{{ eligibility.monthly_income }}" required>
+        </label>
+        <button class="btn btn-primary" type="submit">Recalculate</button>
+      </form>
+      <p id="eligibility-error" role="alert" aria-live="polite"></p>
+    </section>
+  </main>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/eligibility.js') }}"></script>
+{% endblock %}

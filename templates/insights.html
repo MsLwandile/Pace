@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Pace — Monthly insights{% endblock %}
+{% block body_class %}page-app page-insights{% endblock %}
+
+{% block body %}
+<div class="app-shell">
+  {% include "sidebar.html" %}
+  <main class="app-main">
+    <header class="app-header">
+      <div>
+        <p class="dashboard-eyebrow">Guidance for your next step</p>
+        <h1>Your monthly insights</h1>
+      </div>
+    </header>
+
+    <section class="card" aria-labelledby="report-title">
+      <div class="card-header">
+        <h2 id="report-title">Your month</h2>
+        <span class="badge badge-neutral" id="report-period">{{ report.period }}</span>
+      </div>
+      <p id="report-summary">{{ report.summary }}</p>
+      <ul class="insight-list" id="report-metrics">
+        {% for metric in report.metrics %}
+        <li>
+          <span>{{ metric.label }}</span>
+          <strong>{{ metric.value }}</strong>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section class="card" aria-labelledby="insights-title">
+      <h2 id="insights-title">Suggested next steps</h2>
+      <ul class="insight-list" id="insights-list">
+        {% for insight in insights %}
+        <li>
+          <span class="badge badge-neutral">{{ insight.month }}</span>
+          <h3>{{ insight.title }}</h3>
+          <p>{{ insight.body }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+      <h3>What you can do next</h3>
+      <ul class="insight-list" id="report-next-steps">
+        {% for step in report.next_steps %}
+        <li>
+          <strong>{{ step.title }}</strong>
+          <p>{{ step.body }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+      <p id="report-disclaimer" class="signin-note">{{ report.disclaimer }}</p>
+    </section>
+  </main>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/insights.js') }}"></script>
+{% endblock %}
