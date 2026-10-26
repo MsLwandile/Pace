@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% block title %}Pace — Understanding credit{% endblock %}
+{% block body_class %}page-credit-guide{% endblock %}
+
+{% block body %}
+<header class="learning-topbar">
+  <a href="{{ url_for('dashboard_page') }}" class="hero-brand-p">Pace</a>
+  <a href="{{ url_for('dashboard_page') }}">Back to dashboard</a>
+</header>
+
+<main
+  class="learning-main"
+  style="--hero-image: url('{{ url_for('static', filename='images/hero-growth.png') }}')"
+>
+  <section class="learning-hero" aria-labelledby="guide-title">
+    <p class="learning-hero-kicker">The money basics</p>
+    <h1 id="guide-title">Understanding credit</h1>
+    <p>
+      Credit can help you work towards big goals, but it helps to know how it
+      works before you borrow. Let’s break it down, no stress.
+    </p>
+  </section>
+
+  <article class="credit-article">
+    <section class="credit-article-section">
+      <h2>So, what is credit?</h2>
+      <p>
+        Credit is money you borrow now and agree to pay back over time. The
+        person or company lending you the money is the <strong>lender</strong>;
+        you’re the <strong>borrower</strong>. The original amount you borrow is
+        the <strong>principal</strong>.
+      </p>
+      <p>
+        You’ll usually also pay <strong>interest</strong>—the cost of borrowing—
+        and sometimes fees. Your agreement sets out the repayments and when
+        they’re due, so check the full cost, not just the monthly amount.
+      </p>
+      <aside class="article-takeaway">
+        <strong>In everyday terms:</strong> credit lets you pay for something
+        over time, but you’ll pay back what you borrowed plus any interest and
+        fees in your agreement.
+      </aside>
+      <p>
+        Basically, it’s not free money, hey. Future-you still has to pay it back.
+      </p>
+    </section>
+
+    <section class="credit-article-section">
+      <h2>What does “credit health” mean?</h2>
+      <p>
+        Your credit health is the picture of how you manage borrowing and
+        repayments over time. A <strong>credit history</strong> is a record of
+        credit accounts and how they’ve been handled. A <strong>credit report</strong>
+        is the information a credit bureau keeps about that history. A
+        <strong>credit score</strong>, where provided, is one way information in
+        a report may be summarised.
+      </p>
+      <p>
+        Lenders can use credit information along with other details—like your
+        income, expenses, and existing debt—when assessing an application.
+        Different lenders may assess things differently, and a score by itself
+        doesn’t guarantee approval.
+      </p>
+      <p>
+        Think of your credit history as your track record: it helps show how
+        you’ve handled credit before. It’s not the whole story, but it can be
+        part of the conversation when you apply.
+      </p>
+    </section>
+
+    <section class="credit-article-section">
+      <h2>Why might credit matter to you?</h2>
+      <p>
+        Paying for a big goal all at once isn’t always realistic. Credit can
+        spread the cost, but a lender will want to decide whether the repayments
+        are affordable and whether the application fits its criteria.
+      </p>
+      <div class="credit-example-grid">
+        <section class="credit-example">
+          <span class="credit-example-label">Thinking about a car?</span>
+          <div class="credit-example-icon credit-example-icon-car" aria-hidden="true">
+            <svg viewBox="0 0 64 48" role="img">
+              <path d="M10 29 15 17c1-3 4-5 7-5h19c3 0 6 2 7 5l5 12 4 3v9h-5a7 7 0 0 1-14 0H26a7 7 0 0 1-14 0H7v-9l3-3Z" fill="currentColor" opacity=".18"/>
+              <path d="m14 28 4-10c1-2 2-3 5-3h18c2 0 4 1 5 3l4 10H14Z" fill="currentColor" opacity=".55"/>
+              <path d="M10 29 15 17c1-3 4-5 7-5h19c3 0 6 2 7 5l5 12 4 3v9h-5a7 7 0 0 1-14 0H26a7 7 0 0 1-14 0H7v-9l3-3Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+              <circle cx="19" cy="39" r="4" fill="#F8FBF9" stroke="currentColor" stroke-width="3"/>
+              <circle cx="45" cy="39" r="4" fill="#F8FBF9" stroke="currentColor" stroke-width="3"/>
+              <path d="M8 31h7m34 0h7" stroke="currentColor" stroke-linecap="round" stroke-width="3"/>
+            </svg>
+          </div>
+          <h3>Car finance</h3>
+          <p>
+            Say you need a car to get to work, campus, or your side hustle. With
+            car finance, a lender may look at your credit history, income,
+            expenses, deposit, and other debt before deciding whether to offer
+            finance and on what terms. A steady repayment record can be useful,
+            but it doesn’t guarantee approval or a particular interest rate.
+          </p>
+          <p>
+            Eyeing that Jaguar? A healthy credit history can help your
+            application make a stronger impression—but it won’t guarantee
+            approval. The lender still checks affordability and its other
+            criteria. So, before you picture yourself pulling up in Sandton,
+            make sure the monthly instalment fits your real-life budget too.
+          </p>
+          <div class="credit-poll" data-credit-poll>
+            <h4>Quick reality check</h4>
+            <p>Would you want a Jaguar one day?</p>
+            <div class="credit-poll-scale">
+              <span class="credit-poll-rail" aria-hidden="true"></span>
+              <span
+                class="credit-poll-average-marker"
+                style="left: 63%"
+                aria-hidden="true"
+              ><span>Demo average</span></span>
+              <input
+                class="credit-poll-input"
+                id="jaguar-slider"
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                value="50"
+                aria-label="Your position between Jaguar and no Jaguar"
+                aria-describedby="jaguar-poll-note"
+              >
+            </div>
+            <div class="credit-poll-endpoints" aria-hidden="true">
+              <span>Jaguar?</span>
+              <span>No Jaguar?</span>
+            </div>
+            <output
+              class="credit-poll-position"
+              id="jaguar-poll-position"
+              for="jaguar-slider"
+              aria-live="polite"
+            ></output>
+            <p class="credit-poll-note" id="jaguar-poll-note">
+              Illustrative demo average: 63/100—not live visitor responses.
+              This slider doesn’t save or send your choice.
+            </p>
+            <div class="credit-poll-legend" aria-hidden="true">
+              <span><i class="credit-poll-your-key"></i>Your position</span>
+              <span><i class="credit-poll-average-key"></i>Illustrative demo average</span>
+            </div>
+          </div>
+        </section>
+        <section class="credit-example">
+          <span class="credit-example-label">One day, your own place?</span>
+          <div class="credit-example-icon credit-example-icon-home" aria-hidden="true">
+            <svg viewBox="0 0 56 56" role="img">
+              <path d="m7 26 21-18 21 18v22H7V26Z" fill="currentColor" opacity=".16"/>
+              <path d="m5 27 23-20 23 20M10 25v23h36V25M23 48V33h10v15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+              <path d="M16 31h5v6h-5zm19 0h5v6h-5z" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>Home loan (bond)</h3>
+          <p>
+            When you apply for a home loan—often called a bond in South Africa—
+            the lender will assess whether the repayments look affordable.
+            Income, expenses, your deposit, existing debt, and credit
+            information can all matter. Remember to budget for more than the
+            bond repayment too: rates, insurance, and upkeep can add up.
+          </p>
+          <p>
+            Want your own spot one day? Paying accounts on time and keeping
+            borrowing manageable can help you build a positive track record.
+            It’s one part of the picture; the bank will also look at your
+            income, deposit, expenses, and whether you can afford the bond.
+          </p>
+        </section>
+      </div>
+    </section>
+
+    <section class="credit-article-section">
+      <h2>How can you build healthier habits?</h2>
+      <ul class="credit-habit-list">
+        <li><strong>Know your dates:</strong> Keep track of repayment due dates—set a reminder so payday doesn’t catch you sleeping.</li>
+        <li><strong>Borrow within your budget:</strong> Leave room for essentials and surprise expenses. Month-end must still month-end.</li>
+        <li><strong>Read the agreement:</strong> Check the interest, fees, total repayment, and what happens if you pay late. No nasty surprises, please.</li>
+        <li><strong>Ask early:</strong> If you think you’ll miss a payment, contact the lender sooner rather than later and discuss your options.</li>
+        <li><strong>Check your information:</strong> Review your credit report when you can and query anything you don’t recognise.</li>
+      </ul>
+    </section>
+
+    <section class="credit-article-section credit-pace-section">
+      <h2>Where does Pace fit in?</h2>
+      <p>
+        Pace is here to make the basics easier to understand. You can explore
+        an indicative assessment, learn about credit, and use monthly insights
+        to reflect on money habits. The figures and examples in this demo are
+        simulated: Pace isn’t a lender or credit bureau, and its demo assessment
+        isn’t a credit decision or offer.
+      </p>
+      <p>
+        No shortcuts or magic tricks—just clear info and steady habits. Build
+        your credit story one sensible move at a time.
+      </p>
+      <a href="{{ url_for('dashboard_page') }}" class="btn btn-primary">
+        Back to your dashboard
+      </a>
+    </section>
+  </article>
+</main>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='credit-guide.js') }}"></script>
+{% endblock %}

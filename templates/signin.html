@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Pace — Sign in{% endblock %}
+{% block body_class %}page-signin{% endblock %}
+
+{% block body %}
+<main
+  class="signin-shell"
+  style="--signin-image: url('{{ url_for('static', filename='images/hero-growth.png') }}')"
+>
+  <a href="{{ url_for('index') }}" class="signin-brand">Pace</a>
+  <section class="signin-card" aria-labelledby="signin-title">
+    <h1 id="signin-title">Welcome to Pace</h1>
+    <p class="signin-intro">
+      Sign in to continue to your Pace account.
+    </p>
+
+    {% if error %}
+      <p class="signin-error" role="alert">{{ error }}</p>
+    {% endif %}
+    <form class="signin-form" method="post" action="{{ url_for('signin_page') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        value="{{ demo_email or '' }}"
+        autocomplete="username"
+        required
+      >
+      <label for="password">Password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        value="{{ demo_password or '' }}"
+        autocomplete="current-password"
+        required
+      >
+      <button type="submit" class="btn btn-primary btn-block">
+        Sign in
+      </button>
+    </form>
+    <a href="{{ url_for('index') }}" class="signin-back">Back to home</a>
+  </section>
+</main>
+{% endblock %}

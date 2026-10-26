@@ -1,0 +1,25 @@
+<aside class="sidebar">
+  <a href="{{ url_for('dashboard_page') }}" class="sidebar-brand">
+    <span class="brand-logo">P</span>
+    <span class="brand-name small">Pace</span>
+  </a>
+
+  <nav class="sidebar-nav">
+    <a href="{{ url_for('dashboard_page') }}"   class="nav-item {% if request.endpoint == 'dashboard_page' %}active{% endif %}">
+      <span class="nav-icon">⌂</span> Home
+    </a>
+    <a href="{{ url_for('eligibility_page') }}" class="nav-item {% if request.endpoint == 'eligibility_page' %}active{% endif %}">
+      <span class="nav-icon">◈</span> Eligibility
+    </a>
+    <a href="{{ url_for('insights_page') }}"    class="nav-item {% if request.endpoint == 'insights_page' %}active{% endif %}">
+      <span class="nav-icon">✎</span> Insights
+    </a>
+  </nav>
+
+  <form method="post" action="{{ url_for('logout') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button type="submit" class="nav-item nav-logout">
+      <span class="nav-icon">⎋</span> Log out
+    </button>
+  </form>
+</aside>

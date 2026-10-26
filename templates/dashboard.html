@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block title %}Pace — Dashboard{% endblock %}
+{% block body_class %}page-app page-dashboard{% endblock %}
+
+{% block body %}
+<div class="app-shell">
+  <div class="app-topbar">
+  <a href="{{ url_for('dashboard_page') }}" class="app-topbar-brand">
+    <span class="hero-brand-p">Pace</span>
+  </a>
+  <nav class="app-topbar-nav">
+    <a href="{{ url_for('dashboard_page') }}"   class="{% if request.endpoint == 'dashboard_page' %}active{% endif %}">Home</a>
+  </nav>
+  <form method="post" action="{{ url_for('logout') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button type="submit" class="btn-ghost-sm">Log out</button>
+  </form>
+</div>
+
+  <main class="app-main dashboard-main">
+    <section
+      class="dashboard-hero"
+      style="--hero-image: url('{{ url_for('static', filename='images/hero-growth.png') }}')"
+      aria-labelledby="dashboard-greeting"
+    >
+      <div class="dashboard-hero-content">
+        <p class="dashboard-eyebrow">Your Pace overview</p>
+        <h1 class="dashboard-greeting" id="dashboard-greeting">
+          Welcome, <span id="user-name">{{ session.get('user_name', 'Pace user') }}</span>
+        </h1>
+        <p>Build your financial health, one confident step at a time.</p>
+      </div>
+      <div class="avatar dashboard-avatar" id="user-initial" aria-hidden="true">{{ session.get('user_name', 'P')[:1]|upper }}</div>
+    </section>
+
+    <section class="dashboard-grid" aria-label="Your Pace tools">
+      <a href="{{ url_for('eligibility_page') }}" class="dashboard-tile">
+        <span class="dashboard-tile-kicker">Understand your progress</span>
+        <h2>Your assessment and eligibility</h2>
+        <p class="dashboard-tile-description">
+          See your credit tier, indicative limit, and how your profile is assessed.
+        </p>
+        <div class="dashboard-tile-metrics">
+          <div>
+            <span class="card-label">Credit tier</span>
+            <strong id="tier-label">Tier 2</strong>
+          </div>
+          <div>
+            <span class="card-label">Indicative limit</span>
+            <strong id="credit-limit">R 1 700</strong>
+          </div>
+        </div>
+        <div class="dashboard-tile-footer">
+          <img
+            src="{{ url_for('static', filename='images/eligibility-assessment.png') }}"
+            alt=""
+            class="dashboard-tile-image"
+          >
+          <span class="dashboard-tile-link">View your assessment <span aria-hidden="true">→</span></span>
+        </div>
+      </a>
+
+      <a href="{{ url_for('insights_page') }}" class="dashboard-tile">
+        <span class="dashboard-tile-kicker">Guidance for your next step</span>
+        <h2>Your Monthly Insights</h2>
+        <p class="dashboard-tile-description">
+          Explore your monthly report, understand your habits, and find helpful next steps.
+        </p>
+        <div class="dashboard-insights-preview">
+          <span class="insights-preview-dot" aria-hidden="true"></span>
+          <span>Personalised guidance for a healthier financial journey.</span>
+        </div>
+        <div class="dashboard-tile-footer">
+          <img
+            src="{{ url_for('static', filename='images/monthly-insights.png') }}"
+            alt=""
+            class="dashboard-tile-image"
+          >
+          <span class="dashboard-tile-link">Explore monthly insights <span aria-hidden="true">→</span></span>
+        </div>
+      </a>
+
+      <a href="{{ url_for('credit_guide_page') }}" class="dashboard-tile">
+        <span class="dashboard-tile-kicker">Build your financial knowledge</span>
+        <h2>Understanding credit</h2>
+        <p class="dashboard-tile-description">
+          Learn how repayments, credit use, and consistent financial habits
+          can contribute to a healthy credit profile.
+        </p>
+        <div class="dashboard-tile-footer">
+          <img
+            src="{{ url_for('static', filename='images/credit-health.png') }}"
+            alt=""
+            class="dashboard-tile-image"
+          >
+          <span class="dashboard-tile-link">Start the guide <span aria-hidden="true">→</span></span>
+        </div>
+      </a>
+
+      <article class="dashboard-tile">
+        <span class="dashboard-tile-kicker">Keep moving forward</span>
+        <h2>Upcoming milestones</h2>
+        <p class="dashboard-tile-description">
+          Small, consistent actions can help build a stronger financial foundation.
+        </p>
+        <ul class="dashboard-milestones">
+          <li>
+            <span class="milestone-marker" aria-hidden="true">1</span>
+            <span>Review your assessment and eligibility</span>
+          </li>
+          <li>
+            <span class="milestone-marker" aria-hidden="true">2</span>
+            <span>Explore your latest monthly insights</span>
+          </li>
+          <li>
+            <span class="milestone-marker" aria-hidden="true">3</span>
+            <span>Keep building positive financial habits</span>
+          </li>
+        </ul>
+      </article>
+    </section>
+  </main>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Pace — Build financial health and savviness{% endblock %}
+{% block body_class %}page-landing{% endblock %}
+
+{% block body %}
+
+<!-- ============================ HERO ============================ -->
+<section
+  class="hero"
+  style="--hero-image: url('{{ url_for('static', filename='images/hero-growth.png') }}')"
+>
+  <header class="hero-topbar">
+    <a href="{{ url_for('index') }}" class="hero-brand">
+      <span class="hero-brand-p">Pace</span>
+    </a>
+    <a href="{{ url_for('signin_page') }}" class="btn btn-pill btn-ghost-light">
+      Sign in
+    </a>
+  </header>
+
+  <div class="hero-content">
+    <h1 class="hero-title">
+      Assisting you build financial<br>
+      health and savviness
+    </h1>
+    <p class="hero-subtitle">
+      Our mission is to help Pace deliver financial health and savviness
+      to young South Africans — with guided steps that contribute to
+      positive credit health.
+    </p>
+  </div>
+</section>
+
+<!-- ============================ TILES ============================ -->
+<section class="band-cream">
+  <div class="tile-grid">
+
+    <article class="tile" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="tile-dialog" aria-expanded="false">
+      <h2 class="tile-title">Understanding credit</h2>
+      <p class="tile-body">
+        Navigate your first credit steps, and understand what affects,
+        and contributes to a positive credit health.
+      </p>
+      <div class="tile-illustration" aria-hidden="true">
+        <img
+          src="{{ url_for('static', filename='images/credit-health.png') }}"
+          alt=""
+          class="tile-image"
+        >
+      </div>
+    </article>
+
+    <article class="tile" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="tile-dialog" aria-expanded="false">
+      <h2 class="tile-title">Your Eligibility and Assessment</h2>
+      <p class="tile-body">
+        Understand how Pace calculates your credit viability, and where
+        it places you amongst South African youth.
+      </p>
+      <div class="tile-illustration" aria-hidden="true">
+        <img
+          src="{{ url_for('static', filename='images/eligibility-assessment.png') }}"
+          alt=""
+          class="tile-image"
+        >
+      </div>
+    </article>
+
+    <article class="tile" tabindex="0" role="button" aria-haspopup="dialog" aria-controls="tile-dialog" aria-expanded="false">
+      <h2 class="tile-title">Your monthly insights</h2>
+      <p class="tile-body">
+        Analyse and understand your habits, with guided next steps on
+        how to stay on a positive track.
+      </p>
+      <div class="tile-illustration" aria-hidden="true">
+        <img
+          src="{{ url_for('static', filename='images/monthly-insights.png') }}"
+          alt=""
+          class="tile-image"
+        >
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<dialog class="tile-dialog" id="tile-dialog" aria-labelledby="tile-dialog-title">
+  <div class="tile-dialog-panel">
+    <header class="tile-dialog-header">
+      <h2 class="tile-dialog-title" id="tile-dialog-title"></h2>
+      <button class="tile-dialog-close" type="button" aria-label="Close expanded tile">&times;</button>
+    </header>
+    <div class="tile-dialog-content"></div>
+  </div>
+</dialog>
+
+<!-- ============================ FOOTER ============================ -->
+<footer class="site-footer">
+  <nav class="footer-links">
+    <a href="{{ url_for('dashboard_page') }}">Quick links</a>
+    <a href="#">About Us</a>
+    <a href="#">Programs</a>
+    <a href="#">Contact Us</a>
+  </nav>
+  <p class="footer-legal">Luwes. All Rights Reserved</p>
+</footer>
+
+{% endblock %}
